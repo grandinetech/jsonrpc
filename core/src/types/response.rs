@@ -4,7 +4,8 @@ use crate::Result as CoreResult;
 
 /// Successful response
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
+// We cannot use `#[serde(deny_unknown_fields)]` for responses because endpoints
+// don't follow standards strictly.
 pub struct Success {
 	/// Protocol version
 	#[serde(skip_serializing_if = "Option::is_none")]
@@ -17,7 +18,6 @@ pub struct Success {
 
 /// Unsuccessful response
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct Failure {
 	/// Protocol Version
 	#[serde(skip_serializing_if = "Option::is_none")]
